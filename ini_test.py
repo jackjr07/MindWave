@@ -14,19 +14,19 @@ from mindwavemobile.MindwaveDataPoints import AttentionDataPoint
 from mindwavemobile.MindwaveDataPoints import BlinkDataPoint
 import mindwavemobile
 
-#if __name__ == '__main__':
+if __name__ == '__main__':
     # Initialize the bluetooth software serial port
-#    ser = serial.Serial(
-#        port     = "/dev/rfcomm3",
-#        baudrate = 38400,
-#        bytesize = serial.EIGHTBITS,
-#       parity   = serial.PARITY_NONE,
-#        stopbits = serial.STOPBITS_ONE,
-#        timeout  = 1,
-#        xonxoff  = False,
-#        rtscts   = False,
-#        dsrdtr   = False,
-#        writeTimeout = 2 ) 
+    ser = serial.Serial(
+        port     = "/dev/rfcomm3",
+        baudrate = 38400,
+        bytesize = serial.EIGHTBITS,
+       parity   = serial.PARITY_NONE,
+        stopbits = serial.STOPBITS_ONE,
+        timeout  = 1,
+        xonxoff  = False,
+        rtscts   = False,
+        dsrdtr   = False,
+        writeTimeout = 2 ) 
 
     # Initialize and start the Mindwave datapoint reader
 mindwaveDataPointReader = MindwaveDataPointReader()
@@ -46,16 +46,16 @@ if(mindwaveDataPointReader.isConnected()):
                 if(dataPoint.attentionValue >= 40):
                     
                     if blinkState == 1:
-                         print('Forward')
-#                        ser.write(b'f')
+#                         print('Forward')
+                        ser.write(b'f')
 
                     elif blinkState == -1:
-                         print('Backward')
-                        #ser.write(b'b')
+#                         print('Backward')
+                        ser.write(b'b')
 
                 else:
-#                    ser.write(b'n')
-                     print('Blank')   
+                    ser.write(b'n')
+#                     print('Blank')   
             if dataPoint.__class__.__name__ == 'EEGPowersDataPoint':
 
                 if dataPoint.delta > 1000000:
